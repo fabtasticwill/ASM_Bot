@@ -60,7 +60,10 @@ class SimpleIrcBot
           File.delete("/media/fabtasticwill/4173DBF35F437ACD/ASM Bot/temp.s");
         end
         if content.match("-assem") &&secure
-          system("gcc /media/fabtasticwill/4173DBF35F437ACD/ASM Bot/temp.s")
+          command = "./a.out"
+          system("gcc \"/media/fabtasticwill/4173DBF35F437ACD/ASM Bot/temp.s\"")
+          out = `#{command}`    
+          say_to_chan(out)  
         end
         if content.match("!") && secure
           msg.untaint
