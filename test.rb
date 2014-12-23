@@ -69,6 +69,7 @@ class SimpleIrcBot
         if content.match("!") && secure
           msg.untaint
           msg.gsub!(/.*?(?=!)/im, "")
+          msg.tr!("\n"," ")
           msg.delete!('!')
           File.open("/media/fabtasticwill/4173DBF35F437ACD/ASM Bot/temp.s", 'a') { |file| file.write(msg) }
         end
