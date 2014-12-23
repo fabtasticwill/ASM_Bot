@@ -1,4 +1,5 @@
 require 'socket' 
+require 'open3'
 
 class SimpleIrcBot
   def initialize(server, port, channel)
@@ -62,8 +63,8 @@ class SimpleIrcBot
         if content.match("-assem") &&secure
           command = "./a.out"
           system("gcc \"/media/fabtasticwill/4173DBF35F437ACD/ASM Bot/temp.s\"")
-          out = `#{command}`    
-          say_to_chan(out)  
+          out = Open3.popen3(command) { |stdin, stdout, stderr, wait_thr| stdout.read }
+          say_to_chan (out)
         end
         if content.match("!") && secure
           msg.untaint
